@@ -21,6 +21,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -34,7 +36,7 @@ import com.ebay.xcelite.sheet.XceliteSheetImpl;
  * Class description...
  * 
  * @author kharel (kharel@ebay.com)
- * @creation_date Nov 9, 2013
+ * @since Nov 9, 2013
  * 
  */
 public class Xcelite {
@@ -57,6 +59,16 @@ public class Xcelite {
     }
   }
 
+  public Xcelite(InputStream is) {
+    try {
+      workbook = new XSSFWorkbook(is);
+    } catch (FileNotFoundException e) {
+      throw new RuntimeException(e);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+  
   /**
    * Creates new sheet.
    * 
@@ -93,7 +105,7 @@ public class Xcelite {
   /**
    * Gets the sheet with the specified index.
    * 
-   * @param sheetIndex the sheet name
+   * @param sheetName the sheet name
    * @return XceliteSheet object
    */
   public XceliteSheet getSheet(String sheetName) {
@@ -116,6 +128,21 @@ public class Xcelite {
   }
 
   /**
+   * Saves data to a new outputStream.
+   * 
+   * @param out the outputstream to save the data into
+   */
+  public void write(OutputStream out) {
+    try {
+      workbook.write(out);
+    } catch (FileNotFoundException e) {
+      throw new RuntimeException(e);
+    } catch (IOException e) {
+      new RuntimeException(e);
+    }
+  }
+  
+ /**
    * Saves data to a new file.
    * 
    * @param file the file to save the data into
