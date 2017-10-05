@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -43,7 +44,7 @@ public class Xcelite {
 
   private final Workbook workbook;
   private File file;
-
+  
   public Xcelite() {
     workbook = new XSSFWorkbook();
   }
@@ -51,7 +52,12 @@ public class Xcelite {
   public Xcelite(File file) {
     try {
       this.file = file;
-      workbook = new XSSFWorkbook(new FileInputStream(file));
+      
+      if (file.getName().endsWith(".xls")) {
+        workbook = new HSSFWorkbook(new FileInputStream(file));
+      } else {
+        workbook = new XSSFWorkbook(new FileInputStream(file));
+      }
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
     } catch (IOException e) {
@@ -59,9 +65,18 @@ public class Xcelite {
     }
   }
 
+      
   public Xcelite(InputStream is) {
+    this(is, true);
+  }
+  
+  public Xcelite(InputStream is, boolean xml) {
     try {
-      workbook = new XSSFWorkbook(is);
+      if (xml) {
+        workbook = new XSSFWorkbook(is);
+      } else {
+        workbook = new HSSFWorkbook(is);
+      }
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
     } catch (IOException e) {
