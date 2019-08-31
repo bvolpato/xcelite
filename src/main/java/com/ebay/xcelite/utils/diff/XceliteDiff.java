@@ -17,8 +17,6 @@ package com.ebay.xcelite.utils.diff;
 
 import java.util.Collection;
 
-import javax.annotation.Nonnull;
-
 import org.apache.commons.collections.CollectionUtils;
 
 import com.ebay.xcelite.reader.SheetReader;
@@ -53,7 +51,7 @@ public final class XceliteDiff {
    * @param b the second sheet
    * @return DiffResult object which holds the diff result
    */
-  public static <T> DiffResult<T> diff(@Nonnull SheetReader<T> a, @Nonnull SheetReader<T> b) {
+  public static <T> DiffResult<T> diff(SheetReader<T> a, SheetReader<T> b) {
     return diff(a, b, null);
   }
 
@@ -68,7 +66,7 @@ public final class XceliteDiff {
    * @return DiffResult object which holds the diff result
    */
   @SuppressWarnings("unchecked")
-  public static <T> DiffResult<T> diff(@Nonnull SheetReader<T> a, @Nonnull SheetReader<T> b,
+  public static <T> DiffResult<T> diff(SheetReader<T> a, SheetReader<T> b,
       ReportGenerator reportGenerator) {
     Collection<T> ca = a.read();
     Collection<T> cb = b.read();

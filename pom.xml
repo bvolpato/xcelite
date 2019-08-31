@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.brunocvcunha.xcelite</groupId>
 	<artifactId>xcelite</artifactId>
-	<version>2.3-SNAPSHOT</version>
+	<version>2.3</version>
 	<packaging>jar</packaging>
 	<name>xcelite</name>
 	<description>Xcelite is an ORM like Java library which allows you to easily serialize and deserialize Java beans to/from Excel spreadsheets</description>
@@ -44,6 +44,14 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+
+	<distributionManagement>
+		<repository>
+			<id>carol.releases</id>
+			<name>Carol Releases</name>
+			<url>http://nexus3.carol.ai:8080/repository/Releases/</url>
+		</repository>
+	</distributionManagement>
 
 	<profiles>
 		<profile>
@@ -111,12 +119,13 @@
 		<dependency>
 			<groupId>org.reflections</groupId>
 			<artifactId>reflections</artifactId>
-			<version>0.9.9-RC1</version>
+			<version>0.9.11</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
 			<version>3.2.1</version>
 		</dependency>
+
 	</dependencies>
 </project>
